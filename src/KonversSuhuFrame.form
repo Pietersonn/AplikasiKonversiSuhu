@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="radiogroup">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -140,7 +144,7 @@
                 <StringItem index="0" value="Skala "/>
                 <StringItem index="1" value="Celcius"/>
                 <StringItem index="2" value="Fahrenheit"/>
-                <StringItem index="3" value="Kalvin"/>
+                <StringItem index="3" value="Kelvin"/>
                 <StringItem index="4" value="Reamur"/>
               </StringArray>
             </Property>
@@ -159,6 +163,9 @@
         </Component>
         <Component class="javax.swing.JRadioButton" name="jRadioButton1">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="radiogroup"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="kiri ke kanan"/>
           </Properties>
           <Events>
@@ -177,6 +184,9 @@
         </Component>
         <Component class="javax.swing.JRadioButton" name="jRadioButton2">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="radiogroup"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="kanan kekiri"/>
           </Properties>
           <Events>
@@ -190,7 +200,7 @@
                 <StringItem index="0" value="Skala "/>
                 <StringItem index="1" value="Celcius"/>
                 <StringItem index="2" value="Fahrenheit"/>
-                <StringItem index="3" value="Kalvin"/>
+                <StringItem index="3" value="Kelvin"/>
                 <StringItem index="4" value="Reamur"/>
               </StringArray>
             </Property>

@@ -1,4 +1,7 @@
+
 import javax.swing.JOptionPane;
+import javax.swing.*;
+import java.awt.event.*;
 
 public class KonversSuhuFrame extends javax.swing.JFrame {
 
@@ -7,13 +10,21 @@ public class KonversSuhuFrame extends javax.swing.JFrame {
      */
     public KonversSuhuFrame() {
         initComponents();
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char c = evt.getKeyChar();
+                if (!Character.isDigit(c) && c != '.') {
+                    evt.consume();  // Hanya angka dan titik yang diperbolehkan
+                }
+            }
+        });
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        radiogroup = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -31,7 +42,7 @@ public class KonversSuhuFrame extends javax.swing.JFrame {
 
         jLabel1.setText("Masukkan Nilai Suhu");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Skala ", "Celcius", "Fahrenheit", "Kalvin", "Reamur" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Skala ", "Celcius", "Fahrenheit", "Kelvin", "Reamur" }));
 
         jButton1.setText("Konversi");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -40,6 +51,7 @@ public class KonversSuhuFrame extends javax.swing.JFrame {
             }
         });
 
+        radiogroup.add(jRadioButton1);
         jRadioButton1.setText("kiri ke kanan");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -51,6 +63,7 @@ public class KonversSuhuFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Hasil Konversi ");
 
+        radiogroup.add(jRadioButton2);
         jRadioButton2.setText("kanan kekiri");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,7 +71,7 @@ public class KonversSuhuFrame extends javax.swing.JFrame {
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Skala ", "Celcius", "Fahrenheit", "Kalvin", "Reamur" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Skala ", "Celcius", "Fahrenheit", "Kelvin", "Reamur" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -138,7 +151,26 @@ public class KonversSuhuFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    
+        try {
+            double inputValue = Double.parseDouble(jTextField1.getText());
+            String fromScale = (String) jComboBox1.getSelectedItem();
+            String toScale = (String) jComboBox2.getSelectedItem();
+
+            if (fromScale.equals("Skala") || toScale.equals("Skala")) {
+                JOptionPane.showMessageDialog(this, "Pilih skala suhu yang valid untuk konversi.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (fromScale.equals(toScale)) {
+                JOptionPane.showMessageDialog(this, "Pilih skala suhu yang berbeda untuk konversi.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            double result = KonversiSuhuHelper.convert(inputValue, fromScale, toScale);
+            jLabel3.setText("Hasil Konversi: " + result + " " + toScale);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Masukkan nilai numerik yang valid.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -150,9 +182,6 @@ public class KonversSuhuFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -196,5 +225,6 @@ public class KonversSuhuFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.ButtonGroup radiogroup;
     // End of variables declaration//GEN-END:variables
 }
