@@ -153,8 +153,19 @@ public class KonversSuhuFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             double inputValue = Double.parseDouble(jTextField1.getText());
-            String fromScale = (String) jComboBox1.getSelectedItem();
-            String toScale = (String) jComboBox2.getSelectedItem();
+            String fromScale, toScale;
+
+            // Cek arah konversi berdasarkan radio button yang dipilih
+            if (jRadioButton1.isSelected()) {  // kiri ke kanan
+                fromScale = (String) jComboBox1.getSelectedItem();
+                toScale = (String) jComboBox2.getSelectedItem();
+            } else if (jRadioButton2.isSelected()) {  // kanan ke kiri
+                fromScale = (String) jComboBox2.getSelectedItem();
+                toScale = (String) jComboBox1.getSelectedItem();
+            } else {
+                JOptionPane.showMessageDialog(this, "Pilih arah konversi.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
             if (fromScale.equals("Skala") || toScale.equals("Skala")) {
                 JOptionPane.showMessageDialog(this, "Pilih skala suhu yang valid untuk konversi.", "Error", JOptionPane.ERROR_MESSAGE);
