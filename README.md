@@ -43,4 +43,4 @@
 3. Jalankan file `KonversSuhuFrame.java` untuk memulai aplikasi.
 
 # Demo
-
+![Demo Aplikasi](Demo.gif)
